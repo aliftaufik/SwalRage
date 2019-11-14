@@ -23,24 +23,27 @@
 export default {
   data() {
     return {
-      fields: [{ key: "id", label: "No." }, "room_name", "join"]
+      fields: [{ key: "id", label: "No." }, "roomName", "join"]
     };
   },
   methods: {
     join(item, index, button) {
-      // Update data room yang ada di db, id room ada di item.id
-      // Pindah masuk ke dalem room (belum kebayang caranya)
-      // console.log("item:", item);
-      // console.log("item id:", item.id);
-      // console.log("index:", index);
-      // console.log("button:", button);
+      if (!this.$store.state.username)
+        return console.log("Please type username!");
+      this.$store.dispatch("joinRoom", item.roomName).then(room => {
+        this.$router.push(`/rooms/${room.id}`);
+      });
     }
   },
   computed: {
     roomList() {
-      // Dapetin semua data room yang ada
-      return this.$store.state.room_list;
+      return this.$store.state.roomList.map((room, index) => {
+        return { id: index + 1, roomName: room.roomName };
+      });
     }
+  },
+  created() {
+    this.$store.dispatch("loadRooms");
   }
 };
 </script>
