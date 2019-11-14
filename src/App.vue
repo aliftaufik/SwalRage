@@ -9,11 +9,15 @@
 </template>
 
 <style lang="scss">
-$primary: #8e66a4;
-$secondary: #8a3d9b;
-$success: #01baef;
-$light: #f2f4f6;
+$primary: #5fb1f3;
+$secondary: #3085d6;
+$success: #a38fbd;
+$light: #e2e5e8;
 $dark: #282c34;
+
+body {
+  background-color: $light;
+}
 
 @import "~bootstrap";
 @import "~bootstrap-vue";
