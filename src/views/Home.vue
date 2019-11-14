@@ -1,27 +1,34 @@
 <template>
   <div>
     <b-jumbotron bg-variant="primary" text-variant="white" fluid>
-      <template slot="header">Room List</template>
+      <template slot="header">Reem List</template>
       <template slot="lead">Pick a room or create new one!</template>
     </b-jumbotron>
-    <div class="container">
-      <RoomList></RoomList>
-      <b-form inline @submit.prevent="onSubmit">
-        <b-form-group label="Create New Room:" label-for="room_name">
+    <b-container>
+      <b-form inline class="mb-3">
+        <b-form-group label="Your Name:" label-for="username">
           <b-input-group class="mx-3" prepend="@">
             <b-form-input
               prepend="@"
-              id="room_name"
-              v-model="room_name"
+              id="username"
+              v-model="username"
               required
-              placeholder="swalisdangerous"
+              placeholder="abcdefg"
             ></b-form-input>
+          </b-input-group>
+        </b-form-group>
+      </b-form>
+      <RoomList></RoomList>
+      <b-form inline @submit.prevent="onSubmitRoom">
+        <b-form-group label="Create New Room:" label-for="room_name">
+          <b-input-group class="mx-3">
+            <b-form-input id="room_name" v-model="room_name" required placeholder="swalisdangerous"></b-form-input>
           </b-input-group>
         </b-form-group>
 
         <b-button type="submit" variant="primary">Submit</b-button>
       </b-form>
-    </div>
+    </b-container>
   </div>
 </template>
 
@@ -40,11 +47,10 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
+    onSubmitRoom() {
       this.$store.commit("addRoom", this.room_name); // Commit untuk nambah room baru. Harusnya dispatch
       // this.$router.push("/gameroom"); Ketika bikin room langsung masuk ke room
-    },
-    onReset() {}
+    }
   }
 };
 </script>
